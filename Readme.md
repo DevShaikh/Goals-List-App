@@ -1,9 +1,9 @@
-# expo-template-native-base-typescript
+# The Goals App
 
-The official NativeBase TypeScript template for [Expo](https://docs.expo.io/)
+The Goals App is a mobile application which is used to set and keep track on your daily goals.
 
 ## Usage
 
 ```sh
-expo init my-app --template expo-template-native-base-typescript
+npm start OR expo start to launch app in development mode
 ```

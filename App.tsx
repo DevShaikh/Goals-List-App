@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from 'react'
+
+// NATIVE-BASE COMPONENTS
 import {
   Text,
   Link,
@@ -11,61 +13,46 @@ import {
   extendTheme,
   VStack,
   Code,
-} from "native-base";
-import NativeBaseIcon from "./components/NativeBaseIcon";
+  Box,
+  Flex,
+  Input,
+  Button,
+  Divider,
+  useToast,
+} from 'native-base'
 
-// Define the config
-const config = {
-  useSystemColorMode: false,
-  initialColorMode: "dark",
-};
+// CUSTOM COMPONENTS
+import AddGoalInput from './components/AddGoalInput'
+import GoalsList from './components/GoalsList'
 
-// extend the theme
-export const theme = extendTheme({ config });
+const App = () => {
+  // States
+  const [goals, setGoals] = useState<string[]>([])
 
-export default function App() {
+  const toast = useToast()
+
   return (
     <NativeBaseProvider>
-      <Center
-        _dark={{ bg: "blueGray.900" }}
-        _light={{ bg: "blueGray.50" }}
-        px={4}
+      <Box
+        _dark={{ bg: 'blueGray.900' }}
+        _light={{ bg: 'blueGray.50' }}
+        p={4}
+        pt={10}
         flex={1}
+        overflow='hidden'
       >
-        <VStack space={5} alignItems="center">
-          <NativeBaseIcon />
-          <Heading size="lg">Welcome to NativeBase</Heading>
-          <HStack space={2} alignItems="center">
-            <Text>Edit</Text>
-            <Code>App.tsx</Code>
-            <Text>and save to reload.</Text>
-          </HStack>
-          <Link href="https://docs.nativebase.io" isExternal>
-            <Text color="primary.500" underline fontSize={"xl"}>
-              Learn NativeBase
-            </Text>
-          </Link>
-          <ToggleDarkMode />
+        <VStack alignItems='center' space='4'>
+          <Heading borderBottomWidth={2} borderColor='red.500'>
+            The Goals List
+          </Heading>
+          <Divider />
+          <AddGoalInput goals={goals} setGoals={setGoals} />
+          <Divider />
+          <GoalsList goals={goals} setGoals={setGoals} />
         </VStack>
-      </Center>
+      </Box>
     </NativeBaseProvider>
-  );
+  )
 }
 
-// Color Switch Component
-function ToggleDarkMode() {
-  const { colorMode, toggleColorMode } = useColorMode();
-  return (
-    <HStack space={2} alignItems="center">
-      <Text>Dark</Text>
-      <Switch
-        isChecked={colorMode === "light" ? true : false}
-        onToggle={toggleColorMode}
-        aria-label={
-          colorMode === "light" ? "switch to dark mode" : "switch to light mode"
-        }
-      />
-      <Text>Light</Text>
-    </HStack>
-  );
-}
+export default App
