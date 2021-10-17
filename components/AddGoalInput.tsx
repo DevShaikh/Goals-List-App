@@ -16,7 +16,7 @@ const AddGoalInput = ({ goals, setGoals }: GoalsState) => {
     if (goalInput !== '') {
       setGoals([...goals, goalInput])
 
-      // setGoalInput('')
+      setGoalInput('')
 
       !toast.isActive('addGoalToast') &&
         toast.show({
